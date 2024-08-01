@@ -18,3 +18,7 @@ Trying to make a netflix app in android
 
 
 ![WhatsApp Image 2024-07-28 at 19 25 22_a7ce9876](https://github.com/user-attachments/assets/0a21471b-732e-481d-845d-bee79faa3d55)
+
+4.HomeScreen
+
+![WhatsApp Image 2024-08-01 at 18 16 09_51092670](https://github.com/user-attachments/assets/89fe5909-659f-4362-842c-33638ef2850a)
