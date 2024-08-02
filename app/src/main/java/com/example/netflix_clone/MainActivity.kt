@@ -33,11 +33,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.netflix_clone.ui.Screen.HomeScreen
-import com.example.netflix_clone.ui.Screen.NetflixApp
-import com.example.netflix_clone.ui.Screen.NetflixLoginPage
-import com.example.netflix_clone.ui.Screen.NetflixScreen
-import com.example.netflix_clone.ui.Screen.NetflixSignUpPage
+import com.example.netflix_clone.Screen.HomeScreen
+import com.example.netflix_clone.Screen.NetflixApp
+import com.example.netflix_clone.Screen.NetflixLoginPage
+import com.example.netflix_clone.Screen.NetflixScreen
+import com.example.netflix_clone.Screen.NetflixSignUpPage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

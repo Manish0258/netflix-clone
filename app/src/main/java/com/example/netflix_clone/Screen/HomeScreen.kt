@@ -1,4 +1,4 @@
-package com.example.netflix_clone.ui.Screen
+package com.example.netflix_clone.Screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
