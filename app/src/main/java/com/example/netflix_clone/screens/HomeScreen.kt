@@ -1,5 +1,5 @@
 @Composable
-fun NetflixScreen() {
+fun HomeScreen() {
     Scaffold(
         modifier = Modifier.background(color=Color.Black),
         bottomBar = {
