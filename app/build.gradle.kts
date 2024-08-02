@@ -79,5 +79,5 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$2.6.0-alpha01")
     implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation ("com.github.bumptech.glide:glide:4.13.2")
+    implementation (libs.glide)
 }

@@ -40,7 +40,7 @@ fun NetflixApp() {
             NetflixLoginPage(navController = navController)
         }
         composable("signup") {
-            NetflixSignUpPage()
+            NetflixSignUpPage(navController = navController)
         }
     }
 }
@@ -85,7 +85,7 @@ fun NetflixLoginPage(navController: NavController) {
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
             Button(
-                onClick = { },
+                onClick = {navController.navigate("home") },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
             ) {

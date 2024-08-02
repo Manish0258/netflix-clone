@@ -24,9 +24,24 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun NetflixSignUpPage() {
+fun SignUpNav() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "netflix_screen") {
+
+        composable("signup") {
+            NetflixSignUpPage(navController = navController)
+        }
+    }
+}
+
+@Composable
+fun NetflixSignUpPage(navController: NavController) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -49,7 +64,7 @@ fun NetflixSignUpPage() {
                 color = Color.Red,
 
 
-            )
+                )
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
@@ -76,7 +91,7 @@ fun NetflixSignUpPage() {
                 textStyle = TextStyle(color = Color.White)
             )
             Button(
-                onClick = { /* handle sign up click */ },
+                onClick = { navController.navigate("home")  },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
             ) {
@@ -85,3 +100,5 @@ fun NetflixSignUpPage() {
         }
     }
 }
+
+

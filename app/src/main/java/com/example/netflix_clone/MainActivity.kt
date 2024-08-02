@@ -33,6 +33,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.netflix_clone.ui.Screen.HomeScreen
 import com.example.netflix_clone.ui.Screen.NetflixApp
 import com.example.netflix_clone.ui.Screen.NetflixLoginPage
 import com.example.netflix_clone.ui.Screen.NetflixScreen
@@ -63,8 +64,13 @@ fun MyApp() {
             NetflixApp()
         }
         composable("netflix_signup") {
-            NetflixSignUpPage()
+            NetflixSignUpPage(navController = navController)
         }
+
+            composable("home") {
+                HomeScreen()
+            }
+
     }
 }
 
