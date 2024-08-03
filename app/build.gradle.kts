@@ -86,7 +86,8 @@ dependencies {
 
     implementation(libs.firebase.bom)
     implementation(libs.firebase.analytics)
-    implementation ("com.google.android.gms:play-services-base:17.2.1")
+    implementation (libs.play.services.base)
+    implementation ("com.google.firebase:firebase-analytics:22.0.2")
 
 
 }

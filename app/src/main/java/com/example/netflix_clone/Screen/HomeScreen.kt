@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,43 +36,23 @@ import com.example.netflix_clone.R
 @Composable
 fun HomeScreen() {
     Scaffold(
-        modifier = Modifier.background(color= Color.Black),
+        modifier = Modifier.background(color = Color.Black),
         bottomBar = {
-            BottomAppBar(
-                containerColor = Color.Black, modifier = Modifier
-                    .clip(RoundedCornerShape(50.dp)),
-                actions = {
-                    IconButton(onClick = { /* do something */ }) {
-                        Icon(Icons.Filled.Home, contentDescription = "Localized description")
-                    }
-                    Spacer(modifier = Modifier.weight(0.5f, true))
-                    IconButton(onClick = { /* do something */ }) {
-                        Icon(
-                            Icons.Filled.Search,
-                            contentDescription = "Localized description",
-                        )
-                    }
-                    Spacer(modifier = Modifier.weight(0.5f, true))
-                    IconButton(onClick = { /* do something */ }) {
-                        Icon(
-                            Icons.Filled.Favorite,
-                            contentDescription = "Localized description",
-                        )
-                    }
-                    Spacer(modifier = Modifier.weight(0.5f, true))
-                    IconButton(onClick = { /* do something */ }) {
-                        Icon(
-                            Icons.Filled.Person,
-                            contentDescription = "Localized description",
-                        )
-                    }
-                }
+            BottomBar(
+                modifier = Modifier,
+                onClickHome = { /* do something */ },
+                onClickSearch = { /* do something */ },
+                onClickFavorite = { /* do something */ },
+                onClickPerson = { /* do something */ }
             )
         }
+
+
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .fillMaxHeight()
                 .padding(paddingValues)
                 .background(color=Color.Black)
         ) {
@@ -83,7 +64,7 @@ fun HomeScreen() {
                 horizontalArrangement = Arrangement.Absolute.Center
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.netflix_logo),
+                    painter = painterResource(id = R.drawable.netflix_logo2),
                     contentDescription = "Image",
                     modifier= Modifier
                         .size(width = 200.dp, height = 65.dp)
@@ -111,4 +92,33 @@ fun HomeScreen() {
             }
         }
     }
+}
+@Composable
+fun BottomBar(
+    modifier: Modifier = Modifier,
+    onClickHome: () -> Unit = {},
+    onClickSearch: () -> Unit = {},
+    onClickFavorite: () -> Unit = {},
+    onClickPerson: () -> Unit = {}
+) {
+    BottomAppBar(
+        containerColor = Color.Black,
+        actions = {
+            IconButton(onClick = onClickHome) {
+                Icon(Icons.Filled.Home, contentDescription = "Localized description")
+            }
+            Spacer(modifier = Modifier.weight(0.5f, true))
+            IconButton(onClick = onClickSearch) {
+                Icon(Icons.Filled.Search, contentDescription = "Localized description")
+            }
+            Spacer(modifier = Modifier.weight(0.5f, true))
+            IconButton(onClick = onClickFavorite) {
+                Icon(Icons.Filled.Favorite, contentDescription = "Localized description")
+            }
+            Spacer(modifier = Modifier.weight(0.5f, true))
+            IconButton(onClick = onClickPerson) {
+                Icon(Icons.Filled.Person, contentDescription = "Localized description")
+            }
+        }
+    )
 }
