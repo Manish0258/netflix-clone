@@ -27,4 +27,5 @@ Trying to make a netflix app in android
 
 5.HomeScreen
 
-![WhatsApp Image 2024-08-01 at 18 16 09_51092670](https://github.com/user-attachments/assets/89fe5909-659f-4362-842c-33638ef2850a)
+
+![WhatsApp Image 2024-08-03 at 11 43 03_7cce8ba1](https://github.com/user-attachments/assets/49ce8233-a53d-4685-a341-967cf6d2108a)
