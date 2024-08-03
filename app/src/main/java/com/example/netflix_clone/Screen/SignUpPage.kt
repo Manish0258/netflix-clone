@@ -12,7 +12,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,28 +19,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-
-@Composable
-fun SignUpNav() {
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "netflix_screen") {
-
-        composable("signup") {
-            NetflixSignUpPage(navController = navController)
-        }
-    }
-}
+import com.example.netflix_clone.Model.Data.Firebase.auth
 
 @Composable
 fun NetflixSignUpPage(navController: NavController) {
+    val context = LocalContext.current
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -62,7 +50,6 @@ fun NetflixSignUpPage(navController: NavController) {
                 text = "Netflix",
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.Red,
-
 
                 )
             OutlinedTextField(
@@ -91,7 +78,17 @@ fun NetflixSignUpPage(navController: NavController) {
                 textStyle = TextStyle(color = Color.White)
             )
             Button(
-                onClick = { navController.navigate("home")  },
+                onClick = {
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener() { task->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            navController.navigate("netflix_home")
+                        } else {
+                            // Sign in failed, display a message and update UI
+                        }
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
             ) {
@@ -100,5 +97,3 @@ fun NetflixSignUpPage(navController: NavController) {
         }
     }
 }
-
-

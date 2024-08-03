@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -65,6 +66,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.firebase.common.ktx)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -80,4 +83,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$2.6.0-alpha01")
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation (libs.glide)
+
+    implementation(libs.firebase.bom)
+    implementation(libs.firebase.analytics)
+    implementation ("com.google.android.gms:play-services-base:17.2.1")
+
+
 }

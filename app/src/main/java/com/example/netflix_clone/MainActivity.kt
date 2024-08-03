@@ -33,20 +33,23 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.netflix_clone.Screen.NetflixApp
 import com.example.netflix_clone.Screen.NetflixLoginPage
 import com.example.netflix_clone.Screen.NetflixScreen
 import com.example.netflix_clone.Screen.NetflixSignUpPage
 import com.example.netflix_clone.ui.Screen.HomeScreen
+import com.google.firebase.FirebaseApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         setContent {
             MyApp()
         }
     }
 }
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,16 +62,13 @@ fun MyApp() {
         }
         composable("netflix_login") {
             NetflixLoginPage(navController = navController)
-            NetflixApp()
         }
         composable("netflix_signup") {
             NetflixSignUpPage(navController = navController)
         }
-
-            composable("home") {
-                HomeScreen()
-            }
-
+        composable("netflix_home") { // Changed route to "netflix_home"
+            HomeScreen()
+        }
     }
 }
 

@@ -29,21 +29,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.netflix_clone.Model.Data.Firebase.auth
 
 
-@Composable
-fun NetflixApp() {
-    val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = "login") {
-        composable("login") {
-            NetflixLoginPage(navController = navController)
-        }
-        composable("signup") {
-            NetflixSignUpPage(navController = navController)
-        }
-    }
-}
 @Composable
 fun NetflixLoginPage(navController: NavController) {
     var email by remember { mutableStateOf("") }
@@ -60,7 +48,6 @@ fun NetflixLoginPage(navController: NavController) {
                 .fillMaxWidth()
                 .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
-
         ) {
             Text(
                 text = "Netflix",
@@ -70,46 +57,36 @@ fun NetflixLoginPage(navController: NavController) {
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("Email") },
+                label = { Text("Email", color = Color.White) },
                 modifier = Modifier.fillMaxWidth(),
-                textStyle = TextStyle(color = Color.White),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                textStyle = TextStyle(color = Color.White)
             )
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Password") },
+                label = { Text("Password", color = Color.White) },
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.fillMaxWidth(),
-                textStyle = TextStyle(color = Color.White),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                textStyle = TextStyle(color = Color.White)
             )
             Button(
-                onClick = {navController.navigate("home") },
+                onClick = {
+                    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            navController.navigate("netflix_home")
+                        } else {
+                            // Sign in failed, display a message and update UI
+                        }
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
             ) {
-                Text("Sign In")
+                Text("Sign In", color = Color.White)
             }
-            Text(
-                text = "Forgot password?",
-                style = MaterialTheme.typography.bodySmall,
-                color = Color.White,
-                modifier = Modifier
-                    .clickable(onClick = { /* handle forgot password click */ })
-                    .align(Alignment.CenterHorizontally)
-            )
-            Text(
-                text = "New to Netflix? Sign up now",
-                style = MaterialTheme.typography.bodySmall,
-                color = Color.White,
-                modifier = Modifier
-                    .clickable(onClick = { navController.navigate("signup") })
-                    .align(Alignment.CenterHorizontally)
-            )
-
-
-
         }
     }
 }
