@@ -88,6 +88,7 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation (libs.play.services.base)
     implementation ("com.google.firebase:firebase-analytics:22.0.2")
-
+    implementation ("io.coil-kt:coil-compose:1.3.1")
+    implementation ("androidx.compose.material3:material3:1.2.1")
 
 }
