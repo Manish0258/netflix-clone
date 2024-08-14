@@ -46,7 +46,7 @@ fun HomeScreen(navController: NavController) {
                 selectedIcon = selectedIcon.value,
                 onClickHome = { selectedIcon.value = IconType.Home },
                 onClickSearch = { navController.navigate("search") },
-                onClickFavorite = { selectedIcon.value = IconType.Favorite },
+                onClickFavorite = { navController.navigate("favorite") },
                 onClickPerson = { selectedIcon.value = IconType.Person }
             )
         }
@@ -81,15 +81,15 @@ fun HomeScreen(navController: NavController) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TextButton(onClick = { /*TODO*/ }) {
-                    Text("Trending", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodySmall)
+                    Text("Trending", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodyMedium)
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 TextButton(onClick = { /*TODO*/ }) {
-                    Text("Movies", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodySmall)
+                    Text("Movies", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodyMedium)
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 TextButton(onClick = { /*TODO*/ }) {
-                    Text("Up Coming", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodySmall)
+                    Text("Up Coming", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodyMedium)
                 }
 
             }

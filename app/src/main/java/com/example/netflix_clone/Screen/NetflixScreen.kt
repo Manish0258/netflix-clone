@@ -47,6 +47,7 @@ fun NetflixScreen(navController: NavController) {
             contentDescription = "Background Image",
             modifier = Modifier
                 .fillMaxSize()
+                .background(color=Color.Black)
         )
         Row(
             modifier = Modifier

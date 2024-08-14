@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.netflix_clone.Screen.FavoriteScreen
 import com.example.netflix_clone.Screen.HomeScreen
 import com.example.netflix_clone.Screen.NetflixLoginPage
 import com.example.netflix_clone.Screen.NetflixScreen
@@ -42,6 +43,9 @@ fun MyApp() {
         }
         composable("netflix_home") {
             HomeScreen(navController = navController)
+        }
+        composable("favorite") {
+            FavoriteScreen(navController=navController)
         }
         composable("search") {
             SearchScreen()
