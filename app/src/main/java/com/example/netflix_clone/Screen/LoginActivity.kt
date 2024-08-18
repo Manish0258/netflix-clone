@@ -1,63 +1,5 @@
 package com.example.netflix_clone.Screen
 
-
-//@Composable
-//fun NetflixLoginPage(navController: NavController) {
-//    var email by remember { mutableStateOf("") }
-//    var password by remember { mutableStateOf("") }
-//
-//    Surface(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .fillMaxHeight(),
-//        color = Color.Black
-//    ) {
-//        Column(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(20.dp),
-//            verticalArrangement = Arrangement.spacedBy(16.dp)
-//        ) {
-//            Text(
-//                text = "Netflix",
-//                style = MaterialTheme.typography.bodyLarge,
-//                color = Color.Red
-//            )
-//            OutlinedTextField(
-//                value = email,
-//                onValueChange = { email = it },
-//                label = { Text("Email", color = Color.White) },
-//                modifier = Modifier.fillMaxWidth(),
-//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-//                textStyle = TextStyle(color = Color.White)
-//            )
-//            OutlinedTextField(
-//                value = password,
-//                onValueChange = { password = it },
-//                label = { Text("Password", color = Color.White) },
-//                visualTransformation = PasswordVisualTransformation(),
-//                modifier = Modifier.fillMaxWidth(),
-//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-//                textStyle = TextStyle(color = Color.White)
-//            )
-//            Button(
-//                onClick = {
-//                    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-//                        if (task.isSuccessful) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            navController.navigate("netflix_home")
-//                        }
-//                    }
-//                },
-//                modifier = Modifier.fillMaxWidth(),
-//                colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
-//            ) {
-//                Text("Sign In", color = Color.White)
-//            }
-//        }
-//    }
-//}
-
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -84,10 +26,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-
+import androidx.navigation.NavHostController
 
 @Composable
-fun NetflixLoginPage(navController: NavController) {
+fun NetflixLoginPage(navController: NavHostController) {
     val context = LocalContext.current
     val sharedPrefs = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
     var email by remember { mutableStateOf(sharedPrefs.getString("email", "")) }
@@ -95,7 +37,7 @@ fun NetflixLoginPage(navController: NavController) {
     var isLoggedIn by remember { mutableStateOf(sharedPrefs.getBoolean("isLoggedIn", false)) }
     if (isLoggedIn) {
         // User is logged in, navigate to the main screen
-        HomeScreen(navController)
+        TrendingScreen(navController)
     } else {
         Surface(
             modifier = Modifier

@@ -80,7 +80,7 @@ fun NetflixSignUpPage(navController: NavController) {
             Button(
                 onClick = {
                     auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener() { task->
+                        .addOnCompleteListener { task->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             navController.navigate("netflix_home")

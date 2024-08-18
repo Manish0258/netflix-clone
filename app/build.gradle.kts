@@ -88,7 +88,13 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation (libs.play.services.base)
     implementation ("com.google.firebase:firebase-analytics:22.0.2")
-    implementation ("io.coil-kt:coil-compose:1.3.1")
+    implementation ("io.coil-kt:coil-compose:2.6.0")
     implementation ("androidx.compose.material3:material3:1.2.1")
+    implementation("com.google.android.exoplayer:exoplayer:2.19.1")
+    implementation("com.google.android.exoplayer:exoplayer-ui:2.19.1")
+    implementation("androidx.media3:media3-ui:1.4.0")
+    implementation("androidx.media3:media3-common:1.4.0")
+    implementation("androidx.media3:media3-exoplayer:1.4.0")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.28")
 
 }

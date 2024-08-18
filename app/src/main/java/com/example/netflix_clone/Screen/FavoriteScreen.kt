@@ -25,6 +25,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,15 +40,16 @@ import com.example.netflix_clone.R
 
 @Composable
 fun FavoriteScreen(navController: NavController) {
+    val selectedIcon = remember { mutableStateOf(IconType.Favorite) }
     Scaffold(
         modifier = Modifier.background(color = Color.Gray),
         bottomBar = {
             BottomBar(
-                selectedIcon = IconType.Favorite,
-                onClickHome = { navController.navigate("home") },
+                selectedIcon = selectedIcon.value,
+                onClickHome = { navController.navigate("netflix_home") },
                 onClickSearch = { navController.navigate("search") },
-                onClickFavorite = { /* do something */ },
-                onClickPerson = { navController.navigate("person") }
+                onClickFavorite = { selectedIcon.value = IconType.Favorite },
+                onClickPerson = { selectedIcon.value = IconType.Person }
             )
         }
     ) { innerpadding ->
@@ -76,55 +79,8 @@ fun FavoriteScreen(navController: NavController) {
         }
     }
 }
-//
-//@Composable
-//fun BottomBar(
-//    modifier: Modifier = Modifier
-//        .clip(RoundedCornerShape(40.dp)),
-//    selectedIcon: IconType,
-//    onClickHome: () -> Unit = {},
-//    onClickSearch: () -> Unit = {},
-//    onClickFavorite: () -> Unit = {},
-//    onClickPerson: () -> Unit = {}
-//) {
-//    BottomAppBar(
-//        containerColor = Color.Black  ,
-//
-//        actions = {
-//            IconButton(onClick = onClickHome) {
-//                Icon(
-//                    Icons.Filled.Home,
-//                    contentDescription = "Localized description",
-//                    tint = if (selectedIcon == IconType.Home) Color.Red else Color.White
-//                )
-//            }
-//            Spacer(modifier = Modifier.weight(0.5f, true))
-//            IconButton(onClick = onClickSearch) {
-//                Icon(
-//                    Icons.Filled.Search,
-//                    contentDescription = "Localized description",
-//                    tint = if (selectedIcon == IconType.Search) Color.Red else Color.White
-//                )
-//            }
-//            Spacer(modifier = Modifier.weight(0.5f, true))
-//            IconButton(onClick = onClickFavorite) {
-//                Icon(
-//                    Icons.Filled.Favorite,
-//                    contentDescription = "Localized description",
-//                    tint = if (selectedIcon == IconType.Favorite) Color.Red else Color.White
-//                )
-//            }
-//            Spacer(modifier = Modifier.weight(0.5f, true))
-//            IconButton(onClick = onClickPerson) {
-//                Icon(
-//                    Icons.Filled.Person,
-//                    contentDescription = "Localized description",
-//                    tint = if (selectedIcon == IconType.Person) Color.Red else Color.White
-//                )
-//            }
-//        }
-//    )
-//}
+
+
 
 @Composable
 fun JokerScreen() {

@@ -1,8 +1,8 @@
 package com.example.netflix_clone.Screen
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,9 +32,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.example.netflix_clone.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -42,11 +44,11 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.net.URL
 
-
 @Composable
 fun SearchScreen() {
     var searchQuery by remember { mutableStateOf("") }
     var searchResults by remember { mutableStateOf(listOf<Movie>()) }
+    var errorMessage by remember { mutableStateOf("") }
 
     val focusManager = LocalFocusManager.current
 
@@ -61,18 +63,47 @@ fun SearchScreen() {
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .size(70.dp)
+                    .background(color = Color.Black),
+                horizontalArrangement = Arrangement.Absolute.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.netflix_logo2),
+                    contentDescription = "Image",
+                    modifier= Modifier
+                        .size(width = 200.dp, height = 65.dp)
+                        .background(color = Color.Black)
+                )
+            }
             SearchBar(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
                 onSearch = {
                     focusManager.clearFocus()
                     searchMovie(searchQuery) { result ->
-                        searchResults = result
+                        if (result.isEmpty()) {
+                            errorMessage = "No such movie found"
+                            searchResults = listOf()
+                        } else {
+                            errorMessage = ""
+                            searchResults = result
+                        }
                     }
                 }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
+
+            if (errorMessage.isNotEmpty()) {
+                Text(
+                    text = errorMessage,
+                    color = Color.Red,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+            }
 
             LazyColumn(
                 modifier = Modifier
@@ -87,6 +118,7 @@ fun SearchScreen() {
         }
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
@@ -133,39 +165,47 @@ fun MovieItem(movie: Movie) {
 
         Column {
             Text(text = movie.title, color = Color.White)
-            Text(text = "Year: ${movie.year}", color = Color.White)
-            Text(text = "Type: ${movie.type}", color = Color.White)
+            Text(text = movie.year, color = Color.Gray)
+            Text(text = movie.type, color = Color.Gray)
         }
     }
 }
+
+data class Movie(
+    val title: String,
+    val year: String,
+    val type: String,
+    val poster: String
+)
 
 private fun searchMovie(query: String, callback: (List<Movie>) -> Unit) {
     GlobalScope.launch(Dispatchers.IO) {
-        val url = "https://www.omdbapi.com/?apikey=b6fd28d1&s=$query"
-        val result = URL(url).readText()
-        val jsonObject = JSONObject(result)
-        val searchResults = jsonObject.getJSONArray("Search")
+        try {
+            val url = "https://www.omdbapi.com/?apikey=b6fd28d1&s=$query"
+            val result = URL(url).readText()
+            val jsonObject = JSONObject(result)
+            val searchResults = jsonObject.getJSONArray("Search")
 
-        val movies = mutableListOf<Movie>()
-        for (i in 0 until searchResults.length()) {
-            val movieJson = searchResults.getJSONObject(i)
-            movies.add(
-                Movie(
-                    title = movieJson.getString("Title"),
-                    year = movieJson.getString("Year"),
-                    type = movieJson.getString("Type"),
-                    poster = movieJson.getString("Poster")
+            val movies = mutableListOf<Movie>()
+            for (i in 0 until searchResults.length()) {
+                val movieJson = searchResults.getJSONObject(i)
+                movies.add(
+                    Movie(
+                        title = movieJson.getString("Title"),
+                        year = movieJson.getString("Year"),
+                        type = movieJson.getString("Type"),
+                        poster = movieJson.getString("Poster")
+                    )
                 )
-            )
-        }
+            }
 
-        withContext(Dispatchers.Main) {
-            callback(movies)
+            withContext(Dispatchers.Main) {
+                callback(movies)
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                callback(listOf())
+            }
         }
     }
 }
-
-data class Movie(val title: String, val year: String, val type: String, val poster: String)
-
-
-

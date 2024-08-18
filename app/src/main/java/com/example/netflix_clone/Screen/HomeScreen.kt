@@ -42,12 +42,11 @@ fun HomeScreen(navController: NavController) {
         modifier = Modifier.background(color = Color.Black),
         bottomBar = {
             BottomBar(
-                modifier = Modifier,
                 selectedIcon = selectedIcon.value,
-                onClickHome = { selectedIcon.value = IconType.Home },
+                onClickHome = { selectedIcon.value = IconType.Home;navController.navigate("TrendingScreen") },
                 onClickSearch = { navController.navigate("search") },
                 onClickFavorite = { navController.navigate("favorite") },
-                onClickPerson = { selectedIcon.value = IconType.Person }
+                onClickPerson = { navController.navigate("Profile") }
             )
         }
 
@@ -79,19 +78,22 @@ fun HomeScreen(navController: NavController) {
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
-            ) {
-                TextButton(onClick = { /*TODO*/ }) {
+            ) {Spacer(modifier = Modifier.weight(0.5f))
+                val onClickTrending = {  }
+                val onClickMovies = { navController.navigate("MovieScreen") }
+                val onClickSeries = { navController.navigate("SeriesScreen") }
+                TextButton(onClick = onClickTrending) {
                     Text("Trending", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodyMedium)
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                TextButton(onClick = { /*TODO*/ }) {
+                TextButton(onClick = onClickMovies) {
                     Text("Movies", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodyMedium)
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                TextButton(onClick = { /*TODO*/ }) {
-                    Text("Up Coming", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodyMedium)
+                TextButton(onClick = onClickSeries) {
+                    Text("Series", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodyMedium)
                 }
-
+                Spacer(modifier = Modifier.weight(0.5f))
             }
         }
     }
@@ -103,7 +105,6 @@ enum class IconType {
 
 @Composable
 fun BottomBar(
-    modifier: Modifier = Modifier,
     selectedIcon: IconType,
     onClickHome: () -> Unit = {},
     onClickSearch: () -> Unit = {},
@@ -113,6 +114,7 @@ fun BottomBar(
     BottomAppBar(
         containerColor = Color.Black,
         actions = {
+            Spacer(modifier = Modifier.weight(0.15f))
             IconButton(onClick = onClickHome) {
                 Icon(
                     Icons.Filled.Home,
@@ -144,6 +146,7 @@ fun BottomBar(
                     tint = if (selectedIcon == IconType.Person) Color.Red else Color.White
                 )
             }
+            Spacer(modifier = Modifier.weight(0.15f))
         }
     )
 }

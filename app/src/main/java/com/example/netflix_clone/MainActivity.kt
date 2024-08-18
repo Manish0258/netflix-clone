@@ -10,10 +10,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.netflix_clone.Screen.FavoriteScreen
 import com.example.netflix_clone.Screen.HomeScreen
+import com.example.netflix_clone.Screen.MoviesScreen
 import com.example.netflix_clone.Screen.NetflixLoginPage
 import com.example.netflix_clone.Screen.NetflixScreen
 import com.example.netflix_clone.Screen.NetflixSignUpPage
+import com.example.netflix_clone.Screen.ProfileScreen
 import com.example.netflix_clone.Screen.SearchScreen
+import com.example.netflix_clone.Screen.SeriesScreen
+import com.example.netflix_clone.Screen.TrendingScreen
+import com.example.netflix_clone.Screen.YoutubePlayer
 import com.google.firebase.FirebaseApp
 
 class MainActivity : ComponentActivity() {
@@ -41,7 +46,7 @@ fun MyApp() {
         composable("netflix_signup") {
             NetflixSignUpPage(navController = navController)
         }
-        composable("netflix_home") {
+        composable("home") {
             HomeScreen(navController = navController)
         }
         composable("favorite") {
@@ -50,6 +55,20 @@ fun MyApp() {
         composable("search") {
             SearchScreen()
         }
-
+        composable("TrendingScreen") {
+            TrendingScreen(navController = navController)
+        }
+        composable("MovieScreen") {
+            MoviesScreen(navController = navController)
+        }
+        composable("Seriesscreen") {
+            SeriesScreen(navController = navController)
+        }
+        composable("Profile") {
+            ProfileScreen(navController = navController)
+        }
+        composable("youtube/{id}") { backStackEntry ->
+            YoutubePlayer(youtubeVideoId = backStackEntry.arguments?.getString("id") ?: "")
+        }
     }
 }
