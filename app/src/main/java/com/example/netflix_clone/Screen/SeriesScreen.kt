@@ -34,12 +34,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.netflix_clone.Model.Data.Series
 import com.example.netflix_clone.Model.Data.SeriesScreenData
 import com.example.netflix_clone.R
@@ -92,7 +94,7 @@ fun SeriesScreen(navController: NavHostController) {
                 Spacer(modifier = Modifier.weight(0.5f))
                 val onClickTrending = { navController.navigate("TrendingScreen") }
                 val onClickMovies = { navController.navigate("MovieScreen") }
-                val onClickSeries = {  }
+                val onClickSeries = { navController.navigate("SeriesScreen") }
                 TextButton(onClick = onClickTrending) {
                     Text("Trending", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodyMedium)
                 }
@@ -127,7 +129,10 @@ fun Card_s(series: Series, navController: NavHostController) {
                 .background(color = Color.Gray)
         ) {
             AsyncImage(
-                model = series.image,
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(series.image)
+                    .allowHardware(false) // disable hardware acceleration to reduce memory usage
+                    .build(),
                 contentDescription = series.title,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -161,8 +166,8 @@ fun Card_s(series: Series, navController: NavHostController) {
     }
 }
 @Composable
-fun Card_us(movies: Series) {
-    androidx.compose.material3.Card(
+fun Card_us(series: Series) {
+    Card(
         modifier = Modifier
             .width(150.dp)
             .background(color = Color.Black),
@@ -176,8 +181,11 @@ fun Card_us(movies: Series) {
                 .background(color = Color.Gray)
         ) {
             AsyncImage(
-                model = movies.image,
-                contentDescription = movies.title,
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(series.image)
+                    .allowHardware(false) // disable hardware acceleration to reduce memory usage
+                    .build(),
+                contentDescription = series.title,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(170.dp),
@@ -190,14 +198,14 @@ fun Card_us(movies: Series) {
                 verticalArrangement = Arrangement.Bottom
             ) {
                 Text(
-                    text = movies.title,
+                    text = series.title,
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,
                     color = Color.Black,
                     maxLines = 1
                 )
                 Text(
-                    text = movies.genre,
+                    text = series.genre,
                     fontSize = 12.sp,
                     color = Color.Black,
                     maxLines = 1
@@ -268,40 +276,7 @@ fun Popular_Series(navController: NavHostController){
         }
     }
 }
-//
-//@Composable
-//fun Watch_it_Again_s() {
-//    Column(
-//        modifier = Modifier
-//            .padding(16.dp)
-//    ) {
-//        Row {
-//            Text(
-//                text = "Watch it Again",
-//                color = Color.White,
-//                fontSize = 16.sp,
-//                fontWeight = FontWeight.Bold,
-//                modifier = Modifier.padding(8.dp).align(Alignment.CenterVertically)
-//            )
-//            Spacer(modifier = Modifier.width(115.dp))
-//            TextButton(
-//                onClick = { /* Handle view all click */ },
-//                modifier = Modifier.fillMaxWidth()
-//            ) {
-//                Text(text = "View all >", color = Color.Red)
-//            }
-//        }
-//        Spacer(modifier = Modifier.height(8.dp))
-//        LazyRow(
-//            horizontalArrangement = Arrangement.spacedBy(16.dp),
-//            contentPadding = PaddingValues(horizontal = 10.dp)
-//        ) {
-//            items(R_movies.movies) { movie->
-//                Card_s(movie)
-//            }
-//        }
-//    }
-//}
+
 
 @Composable
 fun ScrollItems_s(navController: NavHostController) {
@@ -312,6 +287,6 @@ fun ScrollItems_s(navController: NavHostController) {
     ) {
         Upcomming_Series()
         Popular_Series(navController)
-//        Watch_it_Again_s()
+
     }
 }

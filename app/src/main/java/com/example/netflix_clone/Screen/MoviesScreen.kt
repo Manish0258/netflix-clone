@@ -33,16 +33,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.netflix_clone.Model.Data.Movie
 import com.example.netflix_clone.Model.Data.MoviesScreenData
 import com.example.netflix_clone.R
-
 
 @Composable
 fun MoviesScreen(navController: NavHostController) {
@@ -129,7 +130,10 @@ fun Card_m(movies: Movie, navController: NavHostController) {
                 .background(color = Color.Gray)
         ) {
             AsyncImage(
-                model = movies.image,
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(movies.image)
+                    .allowHardware(false) // disable hardware acceleration to reduce memory usage
+                    .build(),
                 contentDescription = movies.title,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -180,7 +184,10 @@ fun Card_um(movies: Movie) {
                 .background(color = Color.Gray)
         ) {
             AsyncImage(
-                model = movies.image,
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(movies.image)
+                    .allowHardware(false) // disable hardware acceleration to reduce memory usage
+                    .build(),
                 contentDescription = movies.title,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -273,40 +280,6 @@ fun Popular_Movies(navController: NavHostController){
     }
 }
 
-//@Composable
-//fun Watch_it_Again_m(navController: NavHostController) {
-//    Column(
-//        modifier = Modifier
-//            .padding(16.dp)
-//    ) {
-//        Row {
-//            Text(
-//                text = "Watch it Again",
-//                color = Color.White,
-//                fontSize = 16.sp,
-//                fontWeight = FontWeight.Bold,
-//                modifier = Modifier.padding(8.dp).align(Alignment.CenterVertically)
-//            )
-//            Spacer(modifier = Modifier.width(115.dp))
-//            TextButton(
-//                onClick = { /* Handle view all click */ },
-//                modifier = Modifier.fillMaxWidth()
-//            ) {
-//                Text(text = "View all >", color = Color.Red)
-//            }
-//        }
-//        Spacer(modifier = Modifier.height(8.dp))
-//        LazyRow(
-//            horizontalArrangement = Arrangement.spacedBy(16.dp),
-//            contentPadding = PaddingValues(horizontal = 10.dp)
-//        ) {
-//            items(R_movies.movies) { movie->
-//                Card_m(movie)
-//            }
-//        }
-//    }
-//}
-
 @Composable
 fun ScrollItems_m(navController: NavHostController) {
     Column(
@@ -316,6 +289,5 @@ fun ScrollItems_m(navController: NavHostController) {
     ) {
         Upcomming_Movies()
         Popular_Movies(navController)
-//        Watch_it_Again_m()
     }
 }

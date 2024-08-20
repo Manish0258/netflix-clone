@@ -34,12 +34,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.netflix_clone.Model.Data.Movie
 import com.example.netflix_clone.Model.Data.TrendingScreenData
 import com.example.netflix_clone.R
@@ -127,7 +129,10 @@ fun Card(movies: Movie, navController: NavHostController) {
                 .background(color = Color.Gray)
         ) {
             AsyncImage(
-                model = movies.image,
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(movies.image)
+                    .allowHardware(false) // disable hardware acceleration to reduce memory usage
+                    .build(),
                 contentDescription = movies.title,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -257,7 +262,10 @@ fun Watch_it_Again(navController: NavHostController) {
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(horizontal = 10.dp)
         ) {
-            items(TrendingScreenData.watch_it) { movie->
+            items( items=TrendingScreenData.watch_it,
+                key = {
+                    it.id
+                }) { movie->
                 Card(movies = movie, navController = navController)
             }
         }

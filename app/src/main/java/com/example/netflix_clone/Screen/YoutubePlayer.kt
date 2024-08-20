@@ -35,8 +35,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 @Composable
-fun YoutubePlayer(youtubeVideoId: String) {
-    val lifecycleOwner = LocalLifecycleOwner.current
+fun YoutubePlayer(youtubeVideoId: String,navController: NavHostController) {
     Scaffold(
         modifier = Modifier.background(color = Color.Black)
     ) { innerpadding ->
@@ -67,35 +66,22 @@ fun YoutubePlayer(youtubeVideoId: String) {
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
-            ) {
+            ) {Spacer(modifier = Modifier.weight(0.5f))
+                val onClickTrending = { navController.navigate("TrendingScreen") }
+                val onClickMovies = { navController.navigate("MovieScreen") }
+                val onClickSeries = { navController.navigate("SeriesScreen") }
+                TextButton(onClick = onClickTrending) {
+                    Text("Trending", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodyMedium)
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                TextButton(onClick = onClickMovies) {
+                    Text("Movies", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodyMedium)
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                TextButton(onClick = onClickSeries) {
+                    Text("Series", color = Color.White,fontSize = 18.sp, style = MaterialTheme.typography.bodyMedium)
+                }
                 Spacer(modifier = Modifier.weight(0.5f))
-                TextButton(onClick = { /*TODO*/ }) {
-                    Text(
-                        "Trending",
-                        color = Color.White,
-                        fontSize = 18.sp,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                TextButton(onClick = { /*TODO*/ }) {
-                    Text(
-                        "Movies",
-                        color = Color.White,
-                        fontSize = 18.sp,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                TextButton(onClick = { /*TODO*/ }) {
-                    Text(
-                        "Series",
-                        color = Color.White,
-                        fontSize = 18.sp,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                }
-                Spacer(modifier = Modifier.weight(3f))
             }
             ScrollItems_y(youtubeVideoId)
         }

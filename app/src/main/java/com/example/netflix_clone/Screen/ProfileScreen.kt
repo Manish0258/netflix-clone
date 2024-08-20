@@ -1,14 +1,21 @@
 package com.example.netflix_clone.Screen
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
+import android.content.Context
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -19,40 +26,27 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import coil.compose.rememberImagePainter
+import androidx.navigation.NavController
+import com.example.netflix_clone.Model.Data.Firebase.auth
 
-data class User(
-    val name: String,
-    val email: String,
-    val profilePictureUrl: String
-)
 @Composable
-fun ProfileScreen(navController: NavHostController) {
-    val user = User(
-        name = "chinmay sahoo ",
-        email = "chinmaysahoo@gmail.com",
-        profilePictureUrl = "https://www.gravatar.com/avatar/" +
-                "2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
-    )
-
-    ProfilePage(navController)
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Composable
-fun ProfilePage(navController: NavHostController) {
+fun ProfileScreen(navController: NavController) {
+    val context = LocalContext.current
+    val sharedPrefs = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+    var name by remember { mutableStateOf(sharedPrefs.getString("name", "") ?: "") }
+    val email by remember { mutableStateOf(sharedPrefs.getString("email", "") ?: "") }
     var showLogoutDialog by remember { mutableStateOf(false) }
     val selectedIcon = remember { mutableStateOf(IconType.Home) }
     Scaffold(
-        modifier = Modifier.background(color = Color.Black),
+        modifier = Modifier
+            .background(color = Color.Black),
         bottomBar = {
             BottomBar(
                 selectedIcon = IconType.Person,
@@ -62,45 +56,65 @@ fun ProfilePage(navController: NavHostController) {
                 onClickPerson = { selectedIcon.value = IconType.Person }
             )
         }
-    ){innerpadding ->
+    ) { innerpadding ->
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxWidth()
+                .padding(innerpadding)
+                .background(color = Color.Black),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(text= "Profile ",color=Color.White,
                 modifier = Modifier
                     .align(Alignment.Start)
-                    .padding(16.dp),
+                    .padding(20.dp),
                 fontSize = 30.sp
-                )
-            Spacer(modifier = Modifier.height(32.dp))
-//            ProfilePicture(imageUrl = user.profilePictureUrl)
-
-            Spacer(modifier = Modifier.height(16.dp))
-//            Text(
-//                text = user.name,
-//                style = MaterialTheme.typography.bodyMedium,
-//                color = Color.White
-//            )
-            Spacer(modifier = Modifier.height(8.dp))
-//            Text(
-//                text = user.email,
-//                style = MaterialTheme.typography.bodyMedium,
-//                color = Color.Gray
-//            )
-            Spacer(modifier = Modifier.height(24.dp))
-            ProfileOptionButton("Edit Profile") {
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text("Name", color = Color.White) },
+                modifier = Modifier.fillMaxWidth().padding(start=6.dp,end=6.dp),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                textStyle = TextStyle(color = Color.White)
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            OutlinedTextField(
+                value = email,
+                onValueChange = {  },
+                label = { Text("Email", color = Color.White) },
+                modifier = Modifier.fillMaxWidth().padding(start=6.dp,end=6.dp),
+                textStyle = TextStyle(color = Color.White)
+            )
+            Spacer(modifier = Modifier.weight(1.5f))
+            Button(
+                onClick = {
+                    // Save the updated profile information
+                    with(sharedPrefs.edit()) {
+                        putString("name", name)
+                        putString("email",email)
+                        apply()
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+                    .padding(start=6.dp,end=6.dp)
+                    .background(color = Color.Black),
+                shape = RoundedCornerShape(15.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)
+            ) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = "Save Changes", color = Color.White)
+                }
             }
-            ProfileOptionButton("Account Settings") {
-            }
-            ProfileOptionButton("Help") {
-            }
-            ProfileOptionButton("Log Out?") {
-                showLogoutDialog = true
-            }
+            ProfileOptionButton("Account Settings") {}
+            ProfileOptionButton("Help") {}
+            ProfileOptionButton("Log Out?") { showLogoutDialog = true }
         }
     }
     if (showLogoutDialog) {
@@ -114,6 +128,8 @@ fun ProfilePage(navController: NavHostController) {
                 Button(
                     onClick = {
                         showLogoutDialog = false
+                        // Log out user and navigate to login screen
+                        auth.signOut()
                         navController.navigate("netflix_screen")
                     },
                     modifier = Modifier.background(color = Color.Black)
@@ -133,51 +149,34 @@ fun ProfilePage(navController: NavHostController) {
         )
     }
 }
-
-
-@Composable
-fun ProfilePicture(imageUrl: String) {
-    Box(
-        modifier = Modifier
-            .size(100.dp)
-            .clip(CircleShape)
-            .background(Color.Gray)
-    ) {
-        Image(
-            painter = rememberImagePainter(data = imageUrl),
-            contentDescription = "Profile Picture",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
-    }
-}
-
 @Composable
 fun ProfileOptionButton(optionText: String, onClick: () -> Unit) {
     if (optionText == "Log Out?") {
         TextButton(
             onClick = onClick,
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp)
-                .height(100.dp)
+                .fillMaxSize()
         ) {
             Text(text = optionText, color = Color.White)
         }
-    } else {
+    }
+    else {
         Button(
             onClick = onClick,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp)
                 .height(50.dp)
-                .background(color = Color.Black),
-            shape = RoundedCornerShape(15.dp)
+                .background(color = Color.Black)
+                .padding(start=6.dp,end=6.dp),
+            shape = RoundedCornerShape(15.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)
+
+
         )
         {
             Box(
                 modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.CenterStart
+                contentAlignment = Alignment.Center
             ) {
                 Text(text = optionText, color = Color.White)
             }
