@@ -11,28 +11,49 @@ Trying to make a netflix app in android
 2.starting page
 
 
-![WhatsApp Image 2024-07-28 at 19 25 21_64059a59](https://github.com/user-attachments/assets/730e2ec4-c81a-4272-b258-343ff807a07d)
+![WhatsApp Image 2024-08-20 at 11 02 19_c0f4d4ad](https://github.com/user-attachments/assets/4881bdd3-4704-499f-a89f-aeea179a9657)
 
 
 3.SignIn Page
 
 
-![WhatsApp Image 2024-07-28 at 19 25 22_b64b66f3](https://github.com/user-attachments/assets/cbd3c06e-6dc3-4790-9878-019a19fc4464)
+![WhatsApp Image 2024-08-20 at 11 02 19_ff94e6c3](https://github.com/user-attachments/assets/b2221e7e-106b-4a09-8815-dd5d841d30c1)
+
 
 
 4.SignUp Page
 
 
-![WhatsApp Image 2024-07-28 at 19 25 22_a7ce9876](https://github.com/user-attachments/assets/0a21471b-732e-481d-845d-bee79faa3d55)
+![WhatsApp Image 2024-08-20 at 11 02 20_a191a778](https://github.com/user-attachments/assets/23ebcdff-7cdd-4231-8f63-b4b6aeb34ce5)
+
 
 
 5.HomeScreen
 
+a.Trending
+![WhatsApp Image 2024-08-20 at 11 02 19_1be63990](https://github.com/user-attachments/assets/c0fb488b-e69a-4567-946b-5411a9bc782b)
 
-![WhatsApp Image 2024-08-03 at 11 43 03_7cce8ba1](https://github.com/user-attachments/assets/49ce8233-a53d-4685-a341-967cf6d2108a)
+
+b.Movies
+![WhatsApp Image 2024-08-20 at 11 02 18_04b435a1](https://github.com/user-attachments/assets/f6f5b6c6-7dcc-4345-82d9-875a8575caa0)
+
+c.Series
+![WhatsApp Image 2024-08-20 at 11 02 18_9524376b](https://github.com/user-attachments/assets/422ee44f-6845-4dde-ace0-5db57d3dbd69)
 
 
 6.SearchScreen
 
 
-![Screenshot 2024-08-13 114122](https://github.com/user-attachments/assets/d66257f1-29d0-4d41-a342-2708c40e2122)
+![WhatsApp Image 2024-08-20 at 11 02 17_f2eeac9e](https://github.com/user-attachments/assets/1244cfe5-5ae2-4744-9683-2c9961af787c)
+
+
+7.FavoriteScreen
+
+
+![WhatsApp Image 2024-08-20 at 11 02 17_302da75c](https://github.com/user-attachments/assets/29a90209-3f01-4506-a26d-026be27765f4)
+
+
+8.ProfileScreen
+
+![WhatsApp Image 2024-08-20 at 11 02 17_5fc64e5f](https://github.com/user-attachments/assets/0658c888-9cb7-4979-9cfd-fbb5eb0abf53)
+
