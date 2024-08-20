@@ -47,7 +47,7 @@ fun NetflixSignUpPage(navController: NavController) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = "Netflix",
+                text = "Netflex",
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.Red,
 
@@ -83,7 +83,7 @@ fun NetflixSignUpPage(navController: NavController) {
                         .addOnCompleteListener { task->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
-                            navController.navigate("netflix_home")
+                            navController.navigate("home")
                         }
                     }
                 },

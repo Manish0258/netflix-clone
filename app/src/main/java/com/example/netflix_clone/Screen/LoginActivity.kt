@@ -25,7 +25,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 
 @Composable
@@ -52,7 +51,7 @@ fun NetflixLoginPage(navController: NavHostController) {
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
-                    text = "Netflix",
+                    text = "Netflex",
                     style = MaterialTheme.typography.bodyLarge,
                     color = Color.Red
                 )

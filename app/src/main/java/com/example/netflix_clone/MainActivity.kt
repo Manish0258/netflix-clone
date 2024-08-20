@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -48,6 +49,7 @@ fun MyApp() {
         }
         composable("home") {
             HomeScreen(navController = navController)
+            TrendingScreen(navController = navController)
         }
         composable("favorite") {
             FavoriteScreen(navController=navController)
@@ -61,14 +63,14 @@ fun MyApp() {
         composable("MovieScreen") {
             MoviesScreen(navController = navController)
         }
-        composable("Seriesscreen") {
+        composable("SeriesScreen") {
             SeriesScreen(navController = navController)
         }
         composable("Profile") {
             ProfileScreen(navController = navController)
         }
         composable("youtube/{id}") { backStackEntry ->
-            YoutubePlayer(youtubeVideoId = backStackEntry.arguments?.getString("id") ?: "")
+            YoutubePlayer(youtubeVideoId = backStackEntry.arguments?.getString("id") ?: "",navController=navController)
         }
     }
 }

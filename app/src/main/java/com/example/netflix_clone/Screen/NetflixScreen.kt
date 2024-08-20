@@ -77,7 +77,7 @@ fun NetflixScreen(navController: NavController) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "    Unlimited\nentertainment,\n one low price",
+                    text = "    Unlimited\nentertainment,\n at no price",
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp,
                     color = Color.White,
@@ -85,7 +85,7 @@ fun NetflixScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Everything on Netflix,\n       starting @ 149",
+                    text = "Everything on Netflex",
                     fontWeight = FontWeight.Bold,
                     fontSize = 25.sp,
                     color = Color.White
