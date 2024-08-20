@@ -5,8 +5,7 @@ Trying to make a netflix app in android
 1.App logo
 
 
-![Uploading WhatsApp Image 2024-08-20 at 11.10.12_7f679869.jpg…]()
-
+![WhatsApp Image 2024-08-20 at 11 10 12_19af4d5a](https://github.com/user-attachments/assets/d58822cb-f1ca-409f-8171-5689e79d8c9c)
 
 
 2.starting page
