@@ -5,7 +5,8 @@ Trying to make a netflix app in android
 1.App logo
 
 
-![WhatsApp Image 2024-08-03 at 11 43 03_f089eaee](https://github.com/user-attachments/assets/2f567134-4680-4fb8-b029-f97dafa1d5db)
+![Uploading WhatsApp Image 2024-08-20 at 11.10.12_7f679869.jpg…]()
+
 
 
 2.starting page
@@ -31,13 +32,16 @@ Trying to make a netflix app in android
 5.HomeScreen
 
 a.Trending
+
 ![WhatsApp Image 2024-08-20 at 11 02 19_1be63990](https://github.com/user-attachments/assets/c0fb488b-e69a-4567-946b-5411a9bc782b)
 
 
 b.Movies
+
 ![WhatsApp Image 2024-08-20 at 11 02 18_04b435a1](https://github.com/user-attachments/assets/f6f5b6c6-7dcc-4345-82d9-875a8575caa0)
 
 c.Series
+
 ![WhatsApp Image 2024-08-20 at 11 02 18_9524376b](https://github.com/user-attachments/assets/422ee44f-6845-4dde-ace0-5db57d3dbd69)
 
 
