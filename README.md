@@ -1,4 +1,4 @@
-# netflix-clone
+# NETFLEX
 Trying to make a netflix app in android
 
 
@@ -60,3 +60,8 @@ c.Series
 
 ![WhatsApp Image 2024-08-20 at 11 02 17_5fc64e5f](https://github.com/user-attachments/assets/0658c888-9cb7-4979-9cfd-fbb5eb0abf53)
 
+9. Screen Recording
+
+![WhatsApp Image 2024-08-01 at 18 16 09_51092670](https://github.com/user-attachments/assets/db04d305-9883-46e8-93d0-fb00b1e4d464)
+
+   
